@@ -5,31 +5,34 @@
 - **Project**: self-hosted-blog
 - **Parent**: Ai Note Code & Docs / Develop
 - **Type**: static site / blog
-- **Status**: scaffolded
+- **Status**: live
 - **Stack**: Hugo + PaperMod theme
 
-## Hugo Setup
+## Stack
 
-- Hugo binary: `v0.162.1+extended` (Homebrew)
-- Theme: [PaperMod](https://github.com/adityatelange/hugo-PaperMod) (git submodule)
-- Content: `content/posts/`
-- Output: `public/` (gitignored, served by GitHub Pages)
+- **Framework**: Hugo v0.162.1 (extended)
+- **Theme**: [PaperMod](https://github.com/adityatelange/hugo-PaperMod) (git submodule)
+- **Deploy**: GitHub Pages via GitHub Actions
 
-## Next Steps
+## Repository
 
-- [ ] Create GitHub repo and connect remote
-- [ ] Configure GitHub Actions for auto-deploy
-- [ ] Customize `hugo.toml` (title, description, author)
-- [ ] Write first posts
+- **URL**: https://github.com/Hsin-Liu/self-hosted-blog
+- **Branch**: main
+- **Workflow**: `.github/workflows/gh-pages.yml`
 
-## Sub-Projects
+## GitHub Pages Setup (Manual)
 
-### video-batch-processor
+1. Go to repo **Settings → Pages**
+2. Source: **GitHub Actions** (not Branch)
+3. Workflow will auto-run on every push to `main`
 
-- **Type**: Python CLI batch processing tool
-- **Purpose**: Process teaching videos → timeline-aligned notes (PPT frames + Whisper transcription)
-- **Stack**: Python 3.10+, Faster-Whisper, extract-video-ppt, FFmpeg
-- **Status**: Initial scaffold complete
-- **Files**: config.py, video_summarizer.py, batch_processor.py, run_batch.bat, README.md, requirements.txt
-- **Parent**: self-hosted-blog (this project)
-- **Windows**: Compatible via run_batch.bat + Task Scheduler
+## Content
+
+- Posts: `content/posts/*.md`
+- Drafts: `hugo server --buildDrafts`
+- Build: `hugo --gc --minify`
+
+## Notes
+
+- `public/` is gitignored — built by GitHub Actions
+- `themes/PaperMod` is a git submodule
