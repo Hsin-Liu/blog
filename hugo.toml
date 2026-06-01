@@ -1,6 +1,6 @@
 baseURL = 'https://Hsin-Liu.github.io/self-hosted-blog/'
 locale = 'en-us'
-title = 'My Hugo Blog'
+title = 'Blog of Xin'
 theme = 'PaperMod'
 
 [taxonomies]
@@ -14,37 +14,28 @@ delimiters.inline = [['$', '$']]
 
 [params]
 description = 'A personal blog'
-author = 'Your Name'
-keywords = ['blog', 'hugo', 'personal']
+author = 'Xin Liu'
+keywords = ['blog', 'Mathematics', 'Finance']
 
 # Profile / Bio
 [params.profile]
 enabled = true
-avatar = ''  # leave empty for initial, set URL later
-name = 'Your Name'
-tagline = 'Software engineer & writer'
-bio = 'A short bio about yourself. Write a sentence or two describing who you are and what you write about here.'
+avatar = '🧭'  # leave empty for initial, set URL later
+name = 'Xin Liu'
+tagline = 'Mathematics & Finance'
+bio = 'I came; I saw; I conquered.'
 
 # Social links
-[[params.social]]
-name = 'GitHub'
-icon = 'github'
-url = 'https://github.com/'
-
-[[params.social]]
-name = 'Twitter'
-icon = 'twitter'
-url = 'https://twitter.com/'
 
 [[params.social]]
 name = 'Email'
 icon = 'mail'
-url = 'mailto:you@example.com'
+url = 'mailto:xinliu2861@gmail.com'
 
 # Site info
 [params.siteInfo]
-hideFooter = false
+hideFooter = true
 
 # Home page config
 [params.homeInfoParams]
-enabled = false
+enabled = true
