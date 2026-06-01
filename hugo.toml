@@ -15,3 +15,36 @@ delimiters.inline = [['$', '$']]
 [params]
 description = 'A personal blog'
 author = 'Your Name'
+keywords = ['blog', 'hugo', 'personal']
+
+# Profile / Bio
+[params.profile]
+enabled = true
+avatar = ''  # leave empty for initial, set URL later
+name = 'Your Name'
+tagline = 'Software engineer & writer'
+bio = 'A short bio about yourself. Write a sentence or two describing who you are and what you write about here.'
+
+# Social links
+[[params.social]]
+name = 'GitHub'
+icon = 'github'
+url = 'https://github.com/'
+
+[[params.social]]
+name = 'Twitter'
+icon = 'twitter'
+url = 'https://twitter.com/'
+
+[[params.social]]
+name = 'Email'
+icon = 'mail'
+url = 'mailto:you@example.com'
+
+# Site info
+[params.siteInfo]
+hideFooter = false
+
+# Home page config
+[params.homeInfoParams]
+enabled = false

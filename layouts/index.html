@@ -1,34 +1,139 @@
 {{- define "main" }}
 
-{{- if not .IsHome | and .Title }}
-<header class="page-header">
-  <h1>{{ .Title }}</h1>
-</header>
+{{- $profile := site.Params.profile }}
+{{- if $profile.enabled }}
+<section class="profile-header">
+  <div class="profile-content">
+    {{- if $profile.avatar }}
+    <img class="profile-avatar" src="{{ $profile.avatar }}" alt="{{ $profile.name }}">
+    {{- else }}
+    <div class="profile-avatar profile-avatar-initials">{{ substr $profile.name 0 1 }}</div>
+    {{- end }}
+    <div class="profile-info">
+      <h1 class="profile-name">{{ $profile.name }}</h1>
+      {{- if $profile.tagline }}
+      <p class="profile-tagline">{{ $profile.tagline }}</p>
+      {{- end }}
+      {{- if $profile.bio }}
+      <p class="profile-bio">{{ $profile.bio }}</p>
+      {{- end }}
+    </div>
+  </div>
+</section>
 {{- end }}
 
-{{- if .Content }}
-<div class="post-content md-content">
-  {{- .Content }}
+<div class="home-layout">
+
+  <main class="post-grid-main">
+    <h2 class="section-title">Recent Posts</h2>
+
+    {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+    {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+    {{- $paginator := .Paginate $pages 6 }}
+
+    <div class="post-grid">
+      {{- range $paginator.Pages }}
+      <article class="post-card">
+        {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+        {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+        <div class="post-card-content">
+          <h3 class="post-card-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h3>
+          {{- if .Summary }}
+          <p class="post-card-summary">{{ .Summary | plainify | htmlUnescape | truncate 120 }}</p>
+          {{- end }}
+          <div class="post-card-meta">
+            {{- if .Param "tags" }}
+            <div class="post-card-tags">
+              {{- range first 3 .Param "tags" }}
+              <span class="tag">#{{ . }}</span>
+              {{- end }}
+            </div>
+            {{- end }}
+            <div class="post-card-info">
+              {{- if .Param "author" }}{{ .Param "author" }}{{ else }}{{ site.Params.author }}{{ end }}
+              {{- $readingTime := mul (div (countwords .Content) 200.0) 1 }}
+              {{- $mins := math.Floor $readingTime }}
+              {{- if gt $mins 0 }}· {{ $mins }} min{{ else }}· 1 min{{ end }}
+            </div>
+          </div>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+
+    {{- if gt $paginator.TotalPages 1 }}
+    <nav class="pagination">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">« Prev</a>
+      {{- end }}
+      <span class="page-info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL | absURL }}">Next »</a>
+      {{- end }}
+    </nav>
+    {{- end }}
+  </main>
+
+  <aside class="sidebar">
+
+    <section class="sidebar-section">
+      <h3 class="sidebar-title">About</h3>
+      <div class="sidebar-about">
+        {{- if $profile.enabled }}
+        <p>{{ $profile.bio }}</p>
+        {{- else }}
+        <p>A personal blog powered by Hugo + PaperMod.</p>
+        {{- end }}
+      </div>
+    </section>
+
+    {{- $tags := slice }}
+    {{- range site.RegularPages }}
+      {{- range .Param "tags" }}
+        {{- $tags = $tags | append . }}
+      {{- end }}
+    {{- end }}
+    {{- $uniqueTags := $tags | uniq }}
+    {{- if $uniqueTags }}
+    <section class="sidebar-section">
+      <h3 class="sidebar-title">Tags</h3>
+      <div class="tag-cloud">
+        {{- range $uniqueTags }}
+        <a class="tag-cloud-item" href="{{ "tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>
+        {{- end }}
+      </div>
+    </section>
+    {{- end }}
+
+    {{- $categories := site.Taxonomies.categories }}
+    {{- if $categories }}
+    <section class="sidebar-section">
+      <h3 class="sidebar-title">Categories</h3>
+      <ul class="category-list">
+        {{- range $categories }}
+        <li><a href="{{ .Page.Permalink }}">▸ {{ .Page.Title }} ({{ .Count }})</a></li>
+        {{- end }}
+      </ul>
+    </section>
+    {{- end }}
+
+    {{- if site.Params.social }}
+    <section class="sidebar-section">
+      <h3 class="sidebar-title">Links</h3>
+      <div class="social-links">
+        {{- range site.Params.social }}
+        <a class="social-link" href="{{ .url }}" target="_blank" rel="noopener">
+          {{- if eq .icon "github" }}GH{{ else if eq .icon "twitter" }}𝕏{{ else if eq .icon "mail" }}📧{{ else }}{{ .name }}{{ end }}
+        </a>
+        {{- end }}
+        <a class="social-link" href="{{ "index.xml" | absURL }}">🔗 RSS</a>
+      </div>
+    </section>
+    {{- end }}
+
+  </aside>
 </div>
-{{- end }}
-
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-{{- $paginator := .Paginate $pages }}
-
-<h2>Recent Posts</h2>
-{{- range $paginator.Pages }}
-<article class="post-entry">
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </h2>
-  </header>
-  <footer class="entry-footer">
-    {{ .Date.Format "2006-01-02" }}
-  </footer>
-</article>
-{{- end }}
 
 {{- end }}
-{{- /* end main */ -}}
