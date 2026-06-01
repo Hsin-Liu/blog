@@ -9,8 +9,8 @@ category = 'categories'
 
 [markup.goldmark.extensions.passthrough]
 enable = true
-delimiters.block = [['\\[', '\\]'], ['$$', '$$']]
-delimiters.inline = [['\\(', '\\)']]
+delimiters.block = [['$$', '$$']]
+delimiters.inline = [['$', '$']]
 
 [params]
 description = 'A personal blog'
