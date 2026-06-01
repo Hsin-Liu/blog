@@ -4,8 +4,8 @@ A personal blog built with [Hugo](https://gohugo.io/) and the
 [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme, deployed to
 GitHub Pages via GitHub Actions.
 
-- **Site**: <https://Hsin-Liu.github.io/self-hosted-blog/>
-- **Repo**: <https://github.com/Hsin-Liu/self-hosted-blog>
+- **Site**: <https://Hsin-Liu.github.io/blog/>
+- **Repo**: <https://github.com/Hsin-Liu/blog>
 - **Branch deployed**: `main`
 - **Stack**: Hugo v0.162.1 (extended) · PaperMod · GitHub Pages
 
@@ -25,15 +25,15 @@ GitHub Pages via GitHub Actions.
 ## First-Time Setup
 
 ```bash
-git clone https://github.com/Hsin-Liu/self-hosted-blog.git
-cd self-hosted-blog
+git clone https://github.com/Hsin-Liu/blog.git
+cd blog
 git submodule update --init --recursive   # pull the PaperMod theme
 ```
 
 ## Project Structure
 
 ```
-self-hosted-blog/
+blog/
 ├── archetypes/
 │   └── default.md          # template for `hugo new`
 ├── content/
