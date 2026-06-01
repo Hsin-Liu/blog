@@ -5,7 +5,12 @@
 <section class="profile-header">
   <div class="profile-content">
     {{- if $profile.avatar }}
-    <img class="profile-avatar" src="{{ $profile.avatar }}" alt="{{ $profile.name }}">
+    {{- $isURL := or (hasPrefix $profile.avatar "http://") (hasPrefix $profile.avatar "https://") (hasPrefix $profile.avatar "/") }}
+    {{- if $isURL }}
+    <img class="profile-avatar" src="{{ $profile.avatar | absURL }}" alt="{{ $profile.name }}">
+    {{- else }}
+    <div class="profile-avatar profile-avatar-initials">{{ $profile.avatar }}</div>
+    {{- end }}
     {{- else }}
     <div class="profile-avatar profile-avatar-initials">{{ substr $profile.name 0 1 }}</div>
     {{- end }}
