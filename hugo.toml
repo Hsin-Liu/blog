@@ -1,0 +1,12 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'My Hugo Blog'
+theme = 'PaperMod'
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[params]
+  description = 'A personal blog'
+  author = 'Your Name'

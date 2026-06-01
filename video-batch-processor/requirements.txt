@@ -1,0 +1,16 @@
+# Core dependencies
+extract-video-ppt>=0.2.0
+faster-whisper>=1.0.0
+
+# Image processing
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Data processing
+pandas>=2.0.0
+
+# Document generation
+python-docx>=1.0.0
+
+# PyTorch with CUDA 12.4 (install separately - see README)
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
