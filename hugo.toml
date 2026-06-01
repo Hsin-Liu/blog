@@ -4,9 +4,14 @@ title = 'My Hugo Blog'
 theme = 'PaperMod'
 
 [taxonomies]
-  tag = 'tags'
-  category = 'categories'
+tag = 'tags'
+category = 'categories'
+
+[markup.goldmark.extensions.passthrough]
+enable = true
+delimiters.block = [['\\[', '\\]'], ['$$', '$$']]
+delimiters.inline = [['\\(', '\\)']]
 
 [params]
-  description = 'A personal blog'
-  author = 'Your Name'
+description = 'A personal blog'
+author = 'Your Name'

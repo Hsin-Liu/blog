@@ -3,7 +3,7 @@
 ## Metadata
 
 - **Project**: self-hosted-blog
-- **Parent**: Ai Note Code & Docs / Develop
+- **Parent**: Develop
 - **Type**: static site / blog
 - **Status**: live
 - **Stack**: Hugo + PaperMod theme
