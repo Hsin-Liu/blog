@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://Hsin-Liu.github.io/self-hosted-blog/'
 locale = 'en-us'
 title = 'My Hugo Blog'
 theme = 'PaperMod'
