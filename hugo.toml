@@ -20,7 +20,7 @@ keywords = ['blog', 'Mathematics', 'Finance']
 # Profile / Bio
 [params.profile]
 enabled = true
-avatar = '🧭'  # leave empty for initial, set URL later
+avatar = ''  # leave empty for initial, set URL later
 name = 'Xin Liu'
 tagline = 'Mathematics & Finance'
 bio = 'I came; I saw; I conquered.'
