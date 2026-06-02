@@ -1,4 +1,4 @@
-baseURL = 'https://Hsin-Liu.github.io/blog/'
+baseURL = 'https://blog.xinliu.uk/'
 locale = 'en-us'
 title = 'Blog of Xin'
 theme = 'PaperMod'
