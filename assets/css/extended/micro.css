@@ -1,0 +1,106 @@
+/* ============================================================
+ * Micro-post styles. Auto-loaded via head.html's
+ * css/extended/*.css glob. Reuses PaperMod variables.
+ * ============================================================ */
+
+/* --- Full card (used on /micros/ section index) --- */
+.micro-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 800px;
+}
+.micro-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--entry);
+  padding: 0.75rem 1rem;
+  transition: border-color 0.15s ease;
+}
+.micro-card:hover { border-color: var(--primary); }
+
+.micro-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--secondary);
+}
+.micro-card-date {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.micro-card-permalink {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 700;
+}
+.micro-card-permalink:hover { color: var(--primary); }
+
+.micro-card-body { color: var(--content); font-size: 0.95rem; line-height: 1.5; word-wrap: break-word; overflow-wrap: break-word; }
+.micro-card-body p { margin: 0 0 0.4rem 0; }
+.micro-card-body p:last-child { margin-bottom: 0; }
+.micro-card-body a { color: var(--primary); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 2px; }
+.micro-card-body a:hover { text-decoration-color: var(--primary); }
+.micro-card-body pre, .micro-card-body code { background: var(--code-bg); border-radius: 4px; }
+.micro-card-body pre { padding: 0.5rem 0.75rem; overflow-x: auto; font-size: 0.85rem; }
+.micro-card-body code { padding: 0.1rem 0.3rem; font-size: 0.85em; }
+.micro-card-body pre code { padding: 0; background: transparent; }
+.micro-card-tags { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+/* --- Single micro page --- */
+.micro-single { max-width: 800px; margin: 0 auto; }
+.micro-single .post-title { font-size: 1.4rem; margin: 0 0 0.5rem 0; color: var(--primary); }
+.micro-single .post-meta { margin-bottom: 1rem; font-size: 0.85rem; color: var(--secondary); }
+.micro-content { font-size: 1rem; line-height: 1.6; color: var(--content); }
+
+/* --- /micros/ section index --- */
+.micro-section { max-width: 800px; margin: 0 auto; padding: 1rem 0; }
+.micro-section .section-header h1 { font-size: 1.6rem; margin: 0 0 0.5rem 0; color: var(--primary); }
+.section-intro { color: var(--secondary); margin: 0 0 1.5rem 0; line-height: 1.5; }
+
+/* --- Sidebar widget (260px column) --- */
+.sidebar-micros { /* inherits .sidebar-section from custom.css */ }
+.sidebar-micro-list { list-style: none; margin: 0; padding: 0; }
+.sidebar-micro-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.sidebar-micro-item:last-child { border-bottom: none; }
+.sidebar-micro-item .micro-card-date {
+  flex: 0 0 auto;
+  color: var(--secondary);
+  font-size: 0.75rem;
+}
+.sidebar-micro-link {
+  color: var(--primary);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.sidebar-micro-link:hover { text-decoration: underline; }
+.sidebar-micro-all {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  text-decoration: none;
+}
+.sidebar-micro-all:hover { color: var(--primary); }
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .micro-card { padding: 0.6rem 0.8rem; }
+  .micro-card-body { font-size: 0.9rem; }
+  .micro-single .post-title,
+  .micro-section .section-header h1 { font-size: 1.25rem; }
+}

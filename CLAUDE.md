@@ -1,4 +1,4 @@
-# Self-Hosted Blog
+# Blog
 
 > A personal blog built with Hugo + PaperMod, deployed to GitHub Pages via GitHub Actions.
 
@@ -36,6 +36,30 @@
 ## Deployment
 
 Pushing to `main` runs `.github/workflows/gh-pages.yml`, which builds and deploys to GitHub Pages. **Source** in repo Settings → Pages must be set to *GitHub Actions* (not a branch).
+
+## Micro-posts
+
+A second content type for short, tweet-style notes — distinct from long-form `posts/`.
+
+- Location: `content/micros/<slug>.md`
+- Scaffold: `hugo new micros/<slug>.md` (uses `archetypes/micro.md`)
+- URL: `/micros/<slug>/`
+- Listing: `/micros/`
+- Front matter is auto-set to suppress cover, reading time, word count, and author — only the date is shown. Author may add `tags = [...]` and override any field.
+- Micro-posts share the same `tags` taxonomy as long posts (no separate taxonomy).
+- Micro-posts ARE included in the main `/index.xml` RSS feed. To exclude one, set `hiddenInRss: true` in its front matter.
+- The home page surfaces the latest 5 micros in a sidebar widget (`layouts/_partials/micro-sidebar.html`).
+- The top nav has a "Micros" entry declared in `hugo.toml` under `[[menu.main]]`.
+
+## Images
+
+Two patterns supported. Pick by scope.
+
+- **One post only → page bundle.** Convert the post to a directory + `index.md` and place images next to it. Reference with a **relative path** (e.g. `![Figure](figure.png)`). Hugo can process these via `.Resources.GetMatch`.
+- **Shared across posts → `static/`.** Drop the file under `static/images/...`. Reference with a **site-root path** (e.g. `![Logo](/images/site-logo.png)`). No image processing.
+- Cover image in front matter accepts either: `image = "cover.jpg"` (page bundle, relative) or `image = "/images/cover.jpg"` (static, root-relative).
+- Micros have `cover.hidden = true` by default, so the `cover.image` field is a no-op for them — use a page bundle and reference the image inline with a relative path if needed.
+- `public/` and `resources/_gen/` (image-processing cache) are gitignored; safe to delete.
 
 ## Parent
 

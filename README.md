@@ -35,11 +35,14 @@ git submodule update --init --recursive   # pull the PaperMod theme
 ```
 blog/
 ├── archetypes/
-│   └── default.md          # template for `hugo new`
+│   ├── default.md          # template for `hugo new posts/...`
+│   └── micro.md            # template for `hugo new micros/...`
 ├── content/
 │   ├── _index.md           # home page (front matter only)
-│   └── posts/              # blog posts live here
-│       └── hello-world.md
+│   ├── posts/              # long-form blog posts
+│   │   └── hello-world.md
+│   └── micros/             # short, tweet-style notes
+│       └── hello-micro.md
 ├── layouts/                # custom layout overrides
 │   ├── _partials/
 │   └── index.html
@@ -99,7 +102,90 @@ title = 'My Post Title'
 | `categories` | Array of categories                                  |
 | `math`       | `true` enables KaTeX rendering for the post          |
 | `summary`    | Custom summary used in list views                    |
-| `cover`      | Cover image (path under `static/`)                   |
+| `cover`      | Cover image (path under `static/` or page-bundle)    |
+
+### Micro-posts
+
+A second content type for short, tweet-style notes. They live in their own
+section, have their own URL prefix, and render with a compact card style.
+
+```bash
+hugo new micros/your-thought.md      # scaffolds content/micros/your-thought.md
+```
+
+What the `archetypes/micro.md` archetype sets for you:
+
+- `cover.hidden = true` — no cover image on the card or single page
+- `ShowReadingTime = false`, `ShowWordCount = false`, `hideAuthor = true` —
+  only the date is shown in the post meta
+- `tags = []` — empty by default; add `['meta']`, `['math']`, etc.
+- `draft = true` — flip to `false` when ready to publish
+
+URL pattern: `/micros/<slug>/`. Micros also appear in:
+
+- The home page sidebar widget (latest 5, in `layouts/_partials/micro-sidebar.html`)
+- The dedicated listing page at `/micros/`
+- The top nav (entry declared in `hugo.toml` under `[[menu.main]]`)
+- The main `/index.xml` RSS feed (set `hiddenInRss = true` to exclude one)
+
+Micro-posts share the `tags` taxonomy with long posts — a single tag cloud on
+the home page mixes both.
+
+### Images
+
+Two patterns are supported. Pick by scope:
+
+| Used in                    | Pattern                    | Path example                                  |
+| -------------------------- | -------------------------- | --------------------------------------------- |
+| One post only              | **Page bundle**            | `content/posts/my-post/cover.jpg`             |
+| Shared across many posts   | **`static/`** directory    | `static/images/diagrams/payoff.svg`          |
+
+**Page bundle** — turn the post file into a directory + `index.md`, then
+reference images with a **relative path**:
+
+```bash
+mkdir -p content/posts/my-post
+mv content/posts/my-post.md content/posts/my-post/index.md
+cp ~/cover.jpg content/posts/my-post/
+```
+
+```markdown
+<!-- content/posts/my-post/index.md -->
+![Inline figure](figure.png)
+```
+
+Hugo can process bundle images (resize, format conversion) via
+`.Resources.GetMatch`, and the file is deleted when the post is removed.
+
+**`static/` directory** — drop the file anywhere under `static/`. Reference
+with a **site-root path** (leading slash):
+
+```markdown
+![Logo](/images/site-logo.png)
+![Diagram](/images/diagrams/payoff.svg)
+```
+
+No image processing — Hugo copies the file as-is. Use this for logos, favicons,
+diagrams referenced from many posts, or any asset you don't need Hugo to optimize.
+
+Cover image in front matter accepts either pattern:
+
+```toml
+[cover]
+image = "cover.jpg"            # page bundle: relative to the post
+hidden = false
+```
+
+```toml
+[cover]
+image = "/images/covers/intro.jpg"   # static/: site-root path
+hidden = false
+```
+
+> **Tip:** micros set `cover.hidden = true` in the archetype, so the cover
+> image field is effectively a no-op for micros — if you want an inline image
+> in a micro, use a page bundle for that micro and reference it with a
+> relative path.
 
 ### Math (LaTeX)
 

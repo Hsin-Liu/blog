@@ -1,0 +1,8 @@
+{{- $pages := .pages }}
+{{- if gt (len $pages) 0 }}
+<div class="micro-stream">
+  {{- range $pages }}
+  {{- partial "micro-card.html" . }}
+  {{- end }}
+</div>
+{{- end }}

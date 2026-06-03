@@ -1,0 +1,12 @@
+{{- define "main" }}
+<section class="micro-section">
+  <header class="section-header">
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{- with .Content }}
+  <div class="section-intro md-content">{{ . }}</div>
+  {{- end }}
+  {{- $pages := where .Pages "Type" "micros" }}
+  {{- partial "micro-stream.html" (dict "pages" $pages) }}
+</section>
+{{- end }}

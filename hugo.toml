@@ -39,3 +39,17 @@ hideFooter = true
 # Home page config
 [params.homeInfoParams]
 enabled = true
+
+# Top navigation. Adding any [[menu.main]] entry disables Hugo's
+# section auto-population, so both sections must be declared explicitly.
+[[menu.main]]
+identifier = "posts"
+name = "Posts"
+url = "/posts/"
+weight = 10
+
+[[menu.main]]
+identifier = "micros"
+name = "Micros"
+url = "/micros/"
+weight = 20

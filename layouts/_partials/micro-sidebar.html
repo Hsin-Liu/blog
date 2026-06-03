@@ -1,0 +1,20 @@
+{{- $micros := where site.RegularPages "Type" "micros" }}
+{{- if gt (len $micros) 0 }}
+{{- $latest := first 5 $micros }}
+<section class="sidebar-section sidebar-micros">
+  <h3 class="sidebar-title">Micros</h3>
+  <ul class="sidebar-micro-list">
+    {{- range $latest }}
+    <li class="sidebar-micro-item">
+      <time class="micro-card-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+        {{- .Date.Format "Jan 2" -}}
+      </time>
+      <a class="sidebar-micro-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
+        {{- .Content | plainify | htmlUnescape | truncate 80 -}}
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+  <a class="sidebar-micro-all" href="{{ "micros/" | relURL }}">All micros →</a>
+</section>
+{{- end }}

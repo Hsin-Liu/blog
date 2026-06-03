@@ -51,7 +51,7 @@
           <div class="post-card-meta">
             {{- if .Param "tags" }}
             <div class="post-card-tags">
-              {{- range first 3 .Param "tags" }}
+              {{- range first 3 (.Param "tags") }}
               <span class="tag">#{{ . }}</span>
               {{- end }}
             </div>
@@ -93,6 +93,8 @@
         {{- end }}
       </div>
     </section>
+
+    {{- partial "micro-sidebar.html" . }}
 
     {{- $tags := slice }}
     {{- range site.RegularPages }}

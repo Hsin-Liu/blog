@@ -1,0 +1,24 @@
+{{- define "main" }}
+<article class="post-single micro-single">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if not (eq .Date.Year 1) }}
+    <div class="post-meta">
+      <time class="micro-card-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+        {{- .Date.Format "Jan 2, 2006" -}}
+      </time>
+    </div>
+    {{- end }}
+  </header>
+  <div class="post-content micro-content md-content">
+    {{ .Content }}
+  </div>
+  {{- with .Params.tags }}
+  <div class="post-tags">
+    {{- range . }}
+    <a class="tag" href="{{ printf "tags/%s/" . | urlize | relURL }}">#{{ . }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+</article>
+{{- end }}
